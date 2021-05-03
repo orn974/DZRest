@@ -1,0 +1,175 @@
+Index: src/main/java/by/mts/brest/java/DZRest/Controller/DZController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/by/mts/brest/java/DZRest/Controller/DZController.java	(revision 57973722e5820c0472ed3b514e2d523b7cb0b820)
++++ src/main/java/by/mts/brest/java/DZRest/Controller/DZController.java	(date 1620034280985)
+@@ -1,22 +1,28 @@
+ package by.mts.brest.java.DZRest.Controller;
+ 
++
+ import org.springframework.beans.factory.annotation.Autowired;
++import org.springframework.http.ResponseEntity;
+ import org.springframework.stereotype.Controller;
+ import org.springframework.ui.Model;
++import org.springframework.web.bind.annotation.GetMapping;
+ import org.springframework.web.client.RestTemplate;
+ 
++import java.util.List;
++
+ @Controller
+ 
+ public class DZController {
+ 
+-
+-    final String ROOT_URL_DZ = "http://192.168.3.220:8080/";
+     RestTemplate restTemplate;
+-    public String dzGet (Model model){
++    final String ROOT_URL_DZ = "http://192.168.3.220:8080/";
++    @GetMapping("/dz")
++      public String dzGet (Model model){
+         restTemplate=new RestTemplate();
+         ResponseEntity<Employee[]> person = restTemplate.getForEntity(ROOT_URL_DZ+"employees", Employee[].class);
+         Employee[] pageList = person.getBody();
+         model.addAttribute("dzperson", pageList);
+-        return "DZPage";
++       return "DZPage";
+     }
++
+ }
+Index: src/main/resources/templates/DZPage.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/resources/templates/DZPage.html	(revision 57973722e5820c0472ed3b514e2d523b7cb0b820)
++++ src/main/resources/templates/DZPage.html	(date 1620034115210)
+@@ -13,7 +13,7 @@
+         <td style="width: 25%; height: 18px;"; th:text ="${el.name}"></td>
+         <td style="width: 25%; height: 18px;"; th:text="${el.surname}"></td>
+         <td style="width: 25%; height: 18px;"; th:text="${el.patronymic}"></td>
+-        <td style="width: 25%; height: 18px;"; th:text="${el.afterbirth}"></td>
++        <td style="width: 25%; height: 18px;"; th:text="${el.datebirth}"></td>
+         <td style="width: 25%; height: 18px;"; th:text="${el.position}"></td>
+         <td style="width: 25%; height: 18px;"; th:text="${el.adress_work}"></td>
+         <td style="width: 25%; height: 18px;"; th:text="${el.telephone_stack}"></td>
+Index: src/main/java/by/mts/brest/java/DZRest/Controller/Employee.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/by/mts/brest/java/DZRest/Controller/Employee.java	(date 1620033740121)
++++ src/main/java/by/mts/brest/java/DZRest/Controller/Employee.java	(date 1620033740121)
+@@ -0,0 +1,111 @@
++package by.mts.brest.java.DZRest.Controller;
++
++public class Employee {
++    static int portal_id = 0;
++    private String name;
++    private String surname;
++    private String patronymic;
++    private String datebirth;
++    private String position;
++    private String adress_work;
++    private Integer age;
++    // private String grade;
++    private String telephone_stack;
++    private boolean at_work = true;
++
++    public static int getPortal_id() {
++        return portal_id;
++    }
++
++    public static void setPortal_id(int portal_id) {
++        Employee.portal_id = portal_id;
++    }
++
++    public String getName() {
++        return name;
++    }
++
++    public void setName(String name) {
++        this.name = name;
++    }
++
++    public String getSurname() {
++        return surname;
++    }
++
++    public void setSurname(String surname) {
++        this.surname = surname;
++    }
++
++    public String getPatronymic() {
++        return patronymic;
++    }
++
++    public void setPatronymic(String patronymic) {
++        this.patronymic = patronymic;
++    }
++
++    public String getDatebirth() {
++        return datebirth;
++    }
++
++    public void setDatebirth(String datebirth) {
++        this.datebirth = datebirth;
++    }
++
++    public String getPosition() {
++        return position;
++    }
++
++    public void setPosition(String position) {
++        this.position = position;
++    }
++
++    public String getAdress_work() {
++        return adress_work;
++    }
++
++    public void setAdress_work(String adress_work) {
++        this.adress_work = adress_work;
++    }
++
++    public Integer getAge() {
++        return age;
++    }
++
++    public void setAge(Integer age) {
++        this.age = age;
++    }
++
++    public String getTelephone_stack() {
++        return telephone_stack;
++    }
++
++    public void setTelephone_stack(String telephone_stack) {
++        this.telephone_stack = telephone_stack;
++    }
++
++    public Employee(String surname, String name, Integer age, String position) {
++        this.name = name;
++        this.surname = surname;
++        this.position = position;
++        this.age = age;
++    }
++
++    public Employee() {
++        System.out.println();
++    }
++
++    public Employee(String name, String surname, String patronymic, String datebirth, String position, String adress_work, String telephone_stack, boolean at_work/*, String grade*/) {
++        this.name = name;
++        this.surname = surname;
++        this.patronymic = patronymic;
++        this.datebirth = datebirth;
++        this.position = position;
++        this.adress_work = adress_work;
++        this.telephone_stack = telephone_stack;
++        this.at_work = at_work;
++        //this.grade = grade;
++    }
++
++}
