@@ -11,7 +11,7 @@ import org.springframework.web.client.RestTemplate;
 public class DZController {
 
     RestTemplate restTemplate;
-    final String ROOT_URL_DZ = "http://192.168.3.222:8080/";
+    final String ROOT_URL_DZ = "http://192.168.3.220:8080/";
     @GetMapping("/dz")
       public String dzGet (Model model){
         restTemplate=new RestTemplate();

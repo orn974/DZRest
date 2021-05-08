@@ -5,37 +5,29 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Employee {
-    static int portal_id = 0;
-    private String name;
-    private String surname;
-    private String patronymic;
-    private String datebirth;
-    private String position;
-    private String adress_work;
+    private int portalId = 0;
+    private String firstName;
+    private String lastName;
+    private String middleName;
+    private Date birthDate;
+    private String jobPosition;
+    private String workingAddress;
     private Integer age;
-    private String telephone_stack;
-    private boolean at_work = true;
+    private List<String> phoneNumbers;
+    private byte availibility;
 
-    public Employee(String surname, String name, Integer age, String position) {
-        this.name = name;
-        this.surname = surname;
-        this.position = position;
-        this.age = age;
+    public Employee(String firstName, String lastName, Date birthDate) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthDate = birthDate;
     }
 
-    public Employee(String name, String surname, String patronymic, String datebirth, String position, String adress_work, String telephone_stack, boolean at_work/*, String grade*/) {
-        this.name = name;
-        this.surname = surname;
-        this.patronymic = patronymic;
-        this.datebirth = datebirth;
-        this.position = position;
-        this.adress_work = adress_work;
-        this.telephone_stack = telephone_stack;
-        this.at_work = at_work;
-    }
 }
